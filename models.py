@@ -67,8 +67,13 @@ def get_resnet18(num_classes: int = 10, pretrained: bool = False) -> nn.Module:
         num_classes : number of output classes
         pretrained  : whether to load ImageNet weights
     """
-    weights = models.ResNet18_Weights.DEFAULT if pretrained else None
+    '''weights = models.ResNet18_Weights.DEFAULT if pretrained else None
     model = models.resnet18(weights=weights)
+    model.fc = nn.Linear(model.fc.in_features, num_classes)
+    return model'''
+    model = models.resnet18(weights=None)
+    model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
+    model.maxpool = nn.Identity()
     model.fc = nn.Linear(model.fc.in_features, num_classes)
     return model
 
