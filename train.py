@@ -72,7 +72,7 @@ def train_small_model(model: nn.Module,
 def train_large_model(model: nn.Module,
                       train_loader: DataLoader,
                       val_loader: DataLoader,
-                      epochs: int = 100,
+                      epochs: int = 200,
                       lr: float = 0.1,
                       device: str = "cpu") -> nn.Module:
     """
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     print("\n=== Stage 1b: Training ML (ResNet-18) ===")
     model_l = get_resnet18(num_classes=10)
     model_l = train_large_model(model_l, train_loader, val_loader,
-                                 epochs=100, lr=0.1, device=device)
+                                 epochs=200, lr=0.1, device=device)
     torch.save(model_l.state_dict(), "model_l_pretrained.pth")
     print(f"Saved → model_l_pretrained.pth")
 
